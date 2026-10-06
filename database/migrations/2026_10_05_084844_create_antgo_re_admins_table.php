@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('antgo_re_admins', function (Blueprint $table) {
-            $table->id();
+            $table->string('role')->unique()->primary();
+            $table->string('description');
             $table->timestamps();
         });
     }

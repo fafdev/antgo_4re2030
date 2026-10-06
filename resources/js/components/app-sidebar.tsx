@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { BookOpen, CalendarDays, Factory, FolderGit2, LayoutGrid, Layers, Package, Ruler, ShieldCheck, SlidersHorizontal, Users, Wrench } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -14,6 +14,14 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { index as adminsIndex } from '@/routes/admins';
+import { index as characteristicsIndex } from '@/routes/characteristics';
+import { index as datesIndex } from '@/routes/dates';
+import { index as equipmentsIndex } from '@/routes/equipments';
+import { index as infrastructuresIndex } from '@/routes/infrastructures';
+import { index as measuresIndex } from '@/routes/measures';
+import { index as rolesIndex } from '@/routes/roles';
+import { index as usersIndex } from '@/routes/users';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -21,6 +29,60 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Admin',
+        href: adminsIndex(),
+        icon: Wrench,
+        children: [
+            {
+                title: 'Users',
+                href: usersIndex(),
+                icon: Users,
+            },
+            {
+                title: 'Admin roles',
+                href: adminsIndex(),
+                icon: ShieldCheck,
+            },
+        ],
+    },
+    {
+        title: 'Auxiliar',
+        href: rolesIndex(),
+        icon: Layers,
+        children: [
+            {
+                title: 'Roles',
+                href: rolesIndex(),
+                icon: ShieldCheck,
+            },
+            {
+                title: 'Dates',
+                href: datesIndex(),
+                icon: CalendarDays,
+            },
+            {
+                title: 'Characteristics',
+                href: characteristicsIndex(),
+                icon: SlidersHorizontal,
+            },
+            {
+                title: 'Equipments',
+                href: equipmentsIndex(),
+                icon: Package,
+            },
+            {
+                title: 'Infrastructures',
+                href: infrastructuresIndex(),
+                icon: Factory,
+            },
+            {
+                title: 'Measures',
+                href: measuresIndex(),
+                icon: Ruler,
+            },
+        ],
     },
 ];
 

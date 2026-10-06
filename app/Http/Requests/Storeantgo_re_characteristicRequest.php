@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class Storeantgo_re_characteristicRequest extends FormRequest
 {
@@ -12,18 +13,21 @@ class Storeantgo_re_characteristicRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user() !== null;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, array<int, ValidationRule|string>|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'description' => ['required', 'string', 'max:255', Rule::unique('antgo_re_characteristics', 'description')],
+            'inSites' => ['sometimes', 'boolean'],
+            'inBuildings' => ['sometimes', 'boolean'],
+            'inProperties' => ['sometimes', 'boolean'],
         ];
     }
 }

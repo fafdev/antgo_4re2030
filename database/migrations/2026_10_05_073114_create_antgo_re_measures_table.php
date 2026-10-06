@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('antgo_re_measures', function (Blueprint $table) {
             $table->id();
+            $table->string('description');
             $table->timestamps();
         });
     }

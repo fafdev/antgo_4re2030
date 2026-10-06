@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('antgo_re_roles', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description');
+            $table->boolean('inSites')->default(false);
+            $table->boolean('inBuildings')->default(false);
+            $table->boolean('inProperties')->default(false);
+            $table->boolean('inContracts')->default(false);
             $table->timestamps();
         });
     }

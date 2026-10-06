@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('antgo_re_dates', function (Blueprint $table) {
-            $table->id();
+            $table->string('code')->primary()->unique();
+            $table->string('name');
+            $table->string('description');
+            $table->boolean('inSites')->default(false);
+            $table->boolean('inBuildings')->default(false);
+            $table->boolean('inProperties')->default(false);
+            $table->boolean('inContracts')->default(false);
             $table->timestamps();
         });
     }

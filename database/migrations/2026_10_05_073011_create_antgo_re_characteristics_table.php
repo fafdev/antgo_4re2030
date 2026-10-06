@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('antgo_re_characteristics', function (Blueprint $table) {
             $table->id();
+            $table->string('description');
+            $table->boolean('inSites')->default(false);
+            $table->boolean('inBuildings')->default(false);
+            $table->boolean('inProperties')->default(false);
             $table->timestamps();
         });
     }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\antgo_re_characteristic;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class Updateantgo_re_characteristicRequest extends FormRequest
 {
@@ -12,18 +14,24 @@ class Updateantgo_re_characteristicRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user() !== null;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, array<int, ValidationRule|string>|string>
      */
     public function rules(): array
     {
+        /** @var antgo_re_characteristic $characteristic */
+        $characteristic = $this->route('characteristic');
+
         return [
-            //
+            'description' => ['required', 'string', 'max:255', Rule::unique('antgo_re_characteristics', 'description')->ignore($characteristic)],
+            'inSites' => ['sometimes', 'boolean'],
+            'inBuildings' => ['sometimes', 'boolean'],
+            'inProperties' => ['sometimes', 'boolean'],
         ];
     }
 }
