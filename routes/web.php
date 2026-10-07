@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AntgoReAdminController;
 use App\Http\Controllers\AntgoReCharacteristicController;
+use App\Http\Controllers\AntgoReContactController;
 use App\Http\Controllers\AntgoReDateController;
 use App\Http\Controllers\AntgoReEquipmentController;
 use App\Http\Controllers\AntgoReInfrastructureController;
@@ -36,6 +37,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->except(['show', 'create']);
     Route::get('characteristics/template-csv', [AntgoReCharacteristicController::class, 'downloadTemplateCsv'])->name('characteristics.template-csv');
     Route::post('characteristics/import-csv', [AntgoReCharacteristicController::class, 'importCsv'])->name('characteristics.import-csv');
+
+    Route::resource('contacts', AntgoReContactController::class)
+        ->parameters(['contacts' => 'contact'])
+        ->except(['show', 'create']);
+    Route::get('contacts/template-csv', [AntgoReContactController::class, 'downloadTemplateCsv'])->name('contacts.template-csv');
+    Route::post('contacts/import-csv', [AntgoReContactController::class, 'importCsv'])->name('contacts.import-csv');
 
     Route::resource('equipments', AntgoReEquipmentController::class)
         ->parameters(['equipments' => 'equipment'])

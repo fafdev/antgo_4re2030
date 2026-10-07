@@ -12,7 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('antgo_re_contacts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('code')->unique()->index();
+            $table->enum('type', ['Persona', 'Empresa']);
+            $table->string('taxId')->unique();
+            $table->string('formatedName');
+            $table->string('name')->nullable();
+            $table->string('middleName')->nullable();
+            $table->string('lastName')->nullable();
+            $table->string('companyName')->nullable();
+            $table->enum('gender', ['Hombre', 'Mujer', 'Other'])->nullable();
+            $table->date('birthDate')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

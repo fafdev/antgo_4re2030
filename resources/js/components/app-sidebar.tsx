@@ -16,6 +16,7 @@ import {
 import { dashboard } from '@/routes';
 import { index as adminsIndex } from '@/routes/admins';
 import { index as characteristicsIndex } from '@/routes/characteristics';
+import { index as contactsIndex } from '@/routes/contacts';
 import { index as datesIndex } from '@/routes/dates';
 import { index as equipmentsIndex } from '@/routes/equipments';
 import { index as infrastructuresIndex } from '@/routes/infrastructures';
@@ -66,6 +67,11 @@ const mainNavItems: NavItem[] = [
                 title: 'Characteristics',
                 href: characteristicsIndex(),
                 icon: SlidersHorizontal,
+            },
+            {
+                title: 'Contacts',
+                href: contactsIndex(),
+                icon: Users,
             },
             {
                 title: 'Equipments',

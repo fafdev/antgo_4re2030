@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\antgo_re_contact;
 use Illuminate\Database\Seeder;
 
 class AntgoReContactSeeder extends Seeder
@@ -12,6 +12,6 @@ class AntgoReContactSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        antgo_re_contact::factory(10)->create();
     }
 }
