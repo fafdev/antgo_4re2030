@@ -20,6 +20,7 @@ type Contact = {
     birthDate: string | null;
     email: string | null;
     phone: string | null;
+    mobilePhone: string | null;
     addresses: Address[];
 };
 
@@ -52,6 +53,7 @@ export default function ContactsEdit({ contact }: Props) {
         birthDate: contact.birthDate ?? '',
         email: contact.email ?? '',
         phone: contact.phone ?? '',
+        mobilePhone: contact.mobilePhone ?? '',
         addresses: contact.addresses.length > 0
             ? contact.addresses
             : [
@@ -188,7 +190,7 @@ export default function ContactsEdit({ contact }: Props) {
                                 hasAddressValues(address),
                             ),
                         }));
-                        form.put(contactsUpdate(contact.id));
+                        form.put(contactsUpdate(contact.id).url);
                     }}
                     className="space-y-4 rounded-xl border p-4"
                 >
@@ -330,6 +332,17 @@ export default function ContactsEdit({ contact }: Props) {
                             onChange={(event) => form.setData('phone', event.target.value)}
                         />
                         <InputError message={form.errors.phone} />
+                    </div>
+
+                    <div className="grid gap-2">
+                        <Label htmlFor="mobilePhone">Mobile Phone</Label>
+                        <Input
+                            id="mobilePhone"
+                            name="mobilePhone"
+                            value={form.data.mobilePhone}
+                            onChange={(event) => form.setData('mobilePhone', event.target.value)}
+                        />
+                        <InputError message={form.errors.mobilePhone} />
                     </div>
 
                     <div className="space-y-3 rounded-lg border p-3">

@@ -23,6 +23,7 @@ type Contact = {
     birthDate: string | null;
     email: string | null;
     phone: string | null;
+    mobilePhone: string | null;
     addresses?: Address[];
     created_at?: string | null;
     updated_at?: string | null;
@@ -57,6 +58,7 @@ export default function ContactsIndex({ contacts }: Props) {
         birthDate: '',
         email: '',
         phone: '',
+        mobilePhone: '',
         addresses: [
             {
                 street: '',
@@ -101,6 +103,7 @@ export default function ContactsIndex({ contacts }: Props) {
                 contact.companyName ?? '',
                 contact.email ?? '',
                 contact.phone ?? '',
+                contact.mobilePhone ?? '',
             ].some((value) => value.toLowerCase().includes(normalizedSearch));
 
             return matchesType && matchesSearch;
@@ -225,7 +228,7 @@ export default function ContactsIndex({ contacts }: Props) {
                                     hasAddressValues(address),
                                 ),
                             }));
-                            createForm.post(AntgoReContactController.store(), {
+                            createForm.post(AntgoReContactController.store().url, {
                                 onSuccess: () => {
                                     createForm.reset();
                                     createForm.setData('addresses', [
@@ -386,6 +389,17 @@ export default function ContactsIndex({ contacts }: Props) {
                             <InputError message={createForm.errors.phone} />
                         </div>
 
+                        <div className="grid gap-2">
+                            <Label htmlFor="mobilePhone">Mobile Phone</Label>
+                            <Input
+                                id="mobilePhone"
+                                name="mobilePhone"
+                                value={createForm.data.mobilePhone}
+                                onChange={(event) => createForm.setData('mobilePhone', event.target.value)}
+                            />
+                            <InputError message={createForm.errors.mobilePhone} />
+                        </div>
+
                         <div className="space-y-3 rounded-lg border p-3">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-sm font-semibold">Addresses</h3>
@@ -495,7 +509,7 @@ export default function ContactsIndex({ contacts }: Props) {
                                 <p className="text-sm text-muted-foreground">
                                     Required columns: taxId (CIF/NIF/NIE). Optional: name,
                                     middleName, lastName, companyName, gender, birthDate, email,
-                                    phone.
+                                    phone, mobilePhne.
                                 </p>
                                 <a
                                     href={AntgoReContactController.downloadTemplateCsv.url()}
@@ -561,6 +575,7 @@ export default function ContactsIndex({ contacts }: Props) {
                                     <th className="px-2 py-3 font-medium">Formatted name</th>
                                     <th className="px-2 py-3 font-medium">Email</th>
                                     <th className="px-2 py-3 font-medium">Phone</th>
+                                    <th className="px-2 py-3 font-medium">Mobile Phone</th>
                                     <th className="px-2 py-3 font-medium">Updated</th>
                                     <th className="px-2 py-3 font-medium">Actions</th>
                                 </tr>
@@ -581,6 +596,7 @@ export default function ContactsIndex({ contacts }: Props) {
                                             <td className="px-2 py-3">{contact.formatedName}</td>
                                             <td className="px-2 py-3">{contact.email ?? '-'}</td>
                                             <td className="px-2 py-3">{contact.phone ?? '-'}</td>
+                                            <td className="px-2 py-3">{contact.mobilePhone ?? '-'}</td>
                                             <td className="px-2 py-3">
                                                 {contact.updated_at ?? contact.created_at ?? '-'}
                                             </td>

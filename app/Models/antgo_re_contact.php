@@ -26,6 +26,7 @@ class antgo_re_contact extends Model
         'birthDate',
         'email',
         'phone',
+        'mobilePhone',
     ];
 
     protected $table = 'antgo_re_contacts';

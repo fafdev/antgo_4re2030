@@ -42,6 +42,7 @@ class AntgoReContactController extends Controller
                 'birthDate' => $contact->birthDate?->toDateString(),
                 'email' => $contact->email,
                 'phone' => $contact->phone,
+                'mobilePhone' => $contact->mobilePhone,
                 'created_at' => $contact->created_at?->toDateTimeString(),
                 'updated_at' => $contact->updated_at?->toDateTimeString(),
             ]);
@@ -91,6 +92,7 @@ class AntgoReContactController extends Controller
                 'birthDate' => $contact->birthDate?->toDateString(),
                 'email' => $contact->email,
                 'phone' => $contact->phone,
+                'mobilePhone' => $contact->mobilePhone,
                 'addresses' => $contact->addresses()
                     ->orderBy('id')
                     ->get()
@@ -219,6 +221,7 @@ class AntgoReContactController extends Controller
                     'birthDate' => ['nullable', 'date'],
                     'email' => ['nullable', 'email', 'max:255'],
                     'phone' => ['nullable', 'string', 'max:50'],
+                    'mobilePhone' => ['nullable', 'string', 'max:50'],
                 ]);
 
                 if ($validator->fails()) {
@@ -261,7 +264,7 @@ class AntgoReContactController extends Controller
     /**
      * @param  array{taxId: string, name?: ?string, middleName?: ?string, lastName?: ?string, companyName?: ?string, gender?: ?string, birthDate?: ?string, email?: ?string, phone?: ?string}  $payload
      * @param  'Persona'|'Empresa'|null  $lockedType
-     * @return array{id: string, code: string, type: 'Persona'|'Empresa', taxId: string, formatedName: string, name: ?string, middleName: ?string, lastName: ?string, companyName: ?string, gender: ?string, birthDate: ?string, email: ?string, phone: ?string}
+     * @return array{id: string, code: string, type: 'Persona'|'Empresa', taxId: string, formatedName: string, name: ?string, middleName: ?string, lastName: ?string, companyName: ?string, gender: ?string, birthDate: ?string, email: ?string, phone: ?string, mobilePhone: ?string}
      */
     private function normalizePayload(array $payload, ?string $id = null, ?string $lockedType = null, ?string $lockedCode = null): array
     {
@@ -288,6 +291,7 @@ class AntgoReContactController extends Controller
         $birthDate = $this->toNullableString($payload['birthDate'] ?? null);
         $email = $this->toNullableString($payload['email'] ?? null);
         $phone = $this->toNullableString($payload['phone'] ?? null);
+        $mobilePhone = $this->toNullableString($payload['mobilePhone'] ?? null);
 
         if ($type === 'Empresa') {
             if ($companyName === null) {
@@ -327,13 +331,14 @@ class AntgoReContactController extends Controller
             'birthDate' => $birthDate,
             'email' => $email,
             'phone' => $phone,
+            'mobilePhone' => $mobilePhone
         ];
     }
 
     /**
      * @param  array<int, string>  $headers
      * @param  array<int, string>  $row
-     * @return array{taxId: string, name: ?string, middleName: ?string, lastName: ?string, companyName: ?string, gender: ?string, birthDate: ?string, email: ?string, phone: ?string}
+     * @return array{taxId: string, name: ?string, middleName: ?string, lastName: ?string, companyName: ?string, gender: ?string, birthDate: ?string, email: ?string, phone: ?string, mobilePhone: ?string}
      */
     private function mapRowToPayload(array $headers, array $row): array
     {
@@ -359,6 +364,7 @@ class AntgoReContactController extends Controller
             'birthDate' => $this->toNullableString($mappedRow['birthdate'] ?? null),
             'email' => $this->toNullableString($mappedRow['email'] ?? null),
             'phone' => $this->toNullableString($mappedRow['phone'] ?? null),
+            'mobilePhone' => $this->toNullableString($mappedRow['mobilephone'] ?? null),
         ];
     }
 

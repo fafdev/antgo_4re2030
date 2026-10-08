@@ -36,6 +36,7 @@ class AntgoReContactFactory extends Factory
             'birthDate' => fake()->date(),
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber(),
+            'mobilePhone' => fake()->phoneNumber(),
         ];
     }
 }

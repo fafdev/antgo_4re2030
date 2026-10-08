@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('birthDate')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('mobilePhone')->nullable();
             $table->timestamps();
         });
     }

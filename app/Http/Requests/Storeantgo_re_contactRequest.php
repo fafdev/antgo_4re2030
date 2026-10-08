@@ -44,6 +44,7 @@ class Storeantgo_re_contactRequest extends FormRequest
             'birthDate' => ['nullable', 'date'],
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:50'],
+            'mobilePhone' => ['nullable', 'string', 'max:50'],
             'addresses' => ['sometimes', 'array', 'max:20'],
             'addresses.*.id' => ['prohibited'],
             'addresses.*.street' => ['required_with:addresses', 'string', 'max:255'],
